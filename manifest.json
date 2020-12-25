@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "version": "1.9.1",
+    "version": "1.9.2",
     "name": "Play to Kodi",
     "description": "Play, queue and remote control your favourite online media on Kodi / XBMC.",
     "applications": {
@@ -71,6 +71,9 @@
     }, {
         "matches": ["*://*.vessel.com/*"],
         "js": ["js/content_scripts/vessel-content-scripts.js", "js/jquery-2.1.4.min.js"]
+    }, {
+        "matches": ["*://*.media.ccc.de/*"],
+        "js": ["js/content_scripts/cccmedia-content-scripts.js", "js/jquery-2.1.4.min.js"]
     }, {
         "matches": ["*://*.cda.pl/*"],
         "js": ["js/jquery-2.1.4.min.js", "js/jquery-ui-1.11.4.min.js", "js/content_scripts/cda-content-scripts.js"]

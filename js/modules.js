@@ -727,6 +727,29 @@ var VesselLabModule = {
     }
 };
 
+var CccMediaModule = {
+    canHandleUrl: function(url) {
+        var validPatterns = [
+            ".*https://media.ccc.de/v/.*"
+        ];
+        return urlMatchesOneOfPatterns(url, validPatterns);
+    },
+    getMediaType: function() {
+        return 'video';
+    },
+    getPluginPath: function(url, getAddOnVersion, callback) {
+        if (debugLogsEnabled) console.log("Sending message to tab '" + currentTabId + "' for video source.");
+        chrome.tabs.sendMessage(currentTabId, {action: 'getVideoSrc'}, function (response) {
+            if (debugLogsEnabled) {console.log("Response from content script:"); console.log(response); }
+            if (response) {
+                callback(response.videoSrc);
+            } else {
+                if (debugLogsEnabled) console.log("Did not receive response for message");
+            }
+        });
+    }
+};
+
 var VimeoModule = {
     canHandleUrl: function(url) {
         var validPatterns = [
@@ -929,6 +952,7 @@ var allModules = [
     TwitchTvModule,
     UrgantShowModule,
     VesselLabModule,
+    CccMediaModule,
     VimeoModule,
     VivoModule,
     XnxxModule,
