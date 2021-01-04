@@ -80,11 +80,14 @@ function doAction(item, callback) {
 function playCurrentUrl(caller) {
     turnOnLoading(caller);
     chrome.tabs.query({active: true,lastFocusedWindow: true}, function (tab) {
+
         tab = tab[0];
-        chrome.runtime.sendMessage({action: 'playThis', tabId: tab.id, url: tab.url}, function (response) {
-            onChangeUpdate();
-            turnOffLoading(caller);
-        });
+        if (tab) {
+            chrome.runtime.sendMessage({action: 'playThis', tabId: tab.id, url: tab.url}, function (response) {
+                onChangeUpdate();
+                turnOffLoading(caller);
+            });
+        }
     });
 }
 
@@ -481,7 +484,7 @@ function initQueueCount() {
                         console.log("playlistSize:" + playlistSize + ", playlistPosition:" + playlistPosition);
                     }
                     $("#queueVideoButton").html("+Queue(" + leftOvers + ")");
-                    return;
+
                 }
             });
         }

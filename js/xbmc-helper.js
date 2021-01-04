@@ -100,7 +100,7 @@ function ajaxPost(data, callback, timeout) {
         defaultTimeout = timeout;
     }
     if (debugLogsEnabled) {
-        console.log("POST " + data);
+        //console.log("POST " + data);
     }
 
     jQuery.ajax({
@@ -108,7 +108,7 @@ function ajaxPost(data, callback, timeout) {
         url: fullPath,
         success: function (response) {
             if (debugLogsEnabled) {
-                console.log(response);
+                //console.log(response);
             }
             callback(response);
         },
